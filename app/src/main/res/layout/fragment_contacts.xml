@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/title_bar"></include>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@id/swipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@id/contactsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </android.support.v7.widget.RecyclerView>
+        </android.support.v4.widget.SwipeRefreshLayout>
+        <TextView
+            android:id="@id/tvTxt"
+            android:background="@color/qq_blue_dark"
+            android:textSize="40sp"
+            android:textColor="@android:color/white"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="q"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
+        <comemo.example.yls.qqdemo.widget.SlideBar
+            android:id="@id/SlideBar"
+            android:layout_width="20dp"
+            android:layout_gravity="right"
+            android:layout_height="match_parent"
+            />
+    </FrameLayout>
+
+</LinearLayout>

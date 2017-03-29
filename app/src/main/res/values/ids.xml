@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="splash" type="id"/>
+    <item name="user_name" type="id"/>
+    <item name="password" type="id"/>
+    <item name="login" type="id"/>
+    <item name="new_user" type="id"/>
+    <item name="confirm_password" type="id"/>
+    <item name="register" type="id"/>
+    <item name="logout" type="id"/>
+    <item name="back" type="id"/>
+    <item name="add" type="id"/>
+    <item name="title" type="id"/>
+    <item name="contactsRecyclerView" type="id"/>
+    <item name="first_letter" type="id"/>
+    <item name="contact" type="id"/>
+    <item name="swipeRefreshLayout" type="id"/>
+    <item name="chartRecyclerView" type="id"/>
+    <item name="chartText" type="id"/>
+    <item name="send" type="id"/>
+    <item name="avatar" type="id" />
+
+    <item name="tvTxt" type="id" />
+    <item name="tvTime" type="id" />
+    <item name="tvname" type="id" />
+    <item name="tvmsg" type="id" />
+    <item name="tvUnReadCount" type="id" />
+    <item name="converSationRecyclerView" type="id" />
+    <item name="addRecyclerView" type="id" />
+    <item name="search" type="id" />
+    <item name="friend_name" type="id" />
+    <item name="del" type="id" />
+    <item name="SlideBar" type="id" />
+    <item name="confirm" type="id" />
+    <item name="refuse" type="id" />
+    <item name="look" type="id" />
+    <item name="img_message" type="id" />
+</resources>

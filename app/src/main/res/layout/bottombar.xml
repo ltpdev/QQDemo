@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="@android:color/white">
+
+    <ImageView
+        android:id="@+id/qiehuan"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:src="@mipmap/sound" />
+
+    <RelativeLayout
+        android:id="@+id/text_relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/qiehuan">
+
+        <EditText
+            android:id="@id/chartText"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            />
+
+        <Button
+            android:textColor="@android:color/white"
+            android:id="@id/send"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="@string/send"
+            android:background="@drawable/btn_send_selector"
+            android:enabled="false"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/sound_relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/qiehuan">
+
+        <comemo.example.yls.qqdemo.widget.AudioRecorderButton
+            android:id="@+id/btn_record"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/img_more"
+            android:text="@string/recorder_normal"
+            android:gravity="center"
+            android:background="@drawable/btn_recorder_normal"
+            android:textColor="#727272"/>
+
+        <ImageView
+            android:id="@+id/img_more"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/add" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@id/avatar"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
+        android:src="@mipmap/avatar7" />
+
+    <TextView
+        android:id="@id/tvname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_toRightOf="@id/avatar"
+        android:text="@string/user_name"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@id/tvmsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/avatar"
+        android:layout_margin="10dp"
+        android:layout_toRightOf="@id/avatar"
+        android:text="hello world"
+        android:textColor="#9c9c9c"
+        android:textSize="14sp"
+        android:singleLine="true"/>
+
+    <TextView
+        android:id="@id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_margin="10dp"
+        android:text="11:20"
+        android:textColor="#9c9c9c"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@id/tvUnReadCount"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignBottom="@id/avatar"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/unread_msg"
+        android:gravity="center"
+        android:text="3"
+        android:textColor="@android:color/white"
+        android:textSize="10sp"
+        />
+    <View
+        android:layout_below="@id/avatar"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/qq_blue"
+        ></View>
+</RelativeLayout>
+
