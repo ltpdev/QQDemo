@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/setting01"
+        android:title="添加好友"></item>
+    <item
+        android:id="@+id/setting02"
+        android:title="创建群"></item>
+    <item
+        android:id="@+id/setting03"
+        android:title="加入的群"></item>
+</menu>

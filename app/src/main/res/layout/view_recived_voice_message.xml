@@ -18,10 +18,10 @@
 
         <ImageView
             android:id="@+id/id_icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginRight="5dp"
-            android:src="@mipmap/avatar_10" />
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:src="@mipmap/avatar1" />
 
         <FrameLayout
             android:id="@+id/id_recorder_length"
@@ -29,14 +29,14 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/id_icon"
-            android:background="@mipmap/chart_right">
+            android:background="@drawable/receive_msg_pres">
 
             <View
                 android:id="@+id/id_recorder_anim"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_gravity="center"
-                android:background="@mipmap/adj"></View>
+                android:background="@mipmap/adj2"></View>
         </FrameLayout>
 
         <TextView

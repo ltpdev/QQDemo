@@ -4,6 +4,7 @@
     android:id="@+id/activity_look_picture"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/__picker_black_40"
     tools:context="comemo.example.yls.qqdemo.ui.LookPictureActivity">
 <uk.co.senab.photoview.PhotoView
     android:id="@+id/photoview"

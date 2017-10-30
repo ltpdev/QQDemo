@@ -11,7 +11,7 @@ import java.util.concurrent.Executors;
  */
 
 public class ThreadUtils {
-    public static Executor mExecutor = Executors.newSingleThreadExecutor();
+    public static Executor mExecutor = Executors.newFixedThreadPool(6);
     public static Handler mHandler = new Handler(Looper.getMainLooper());
 
     public static void runOnBackgroundThread(Runnable runnable) {

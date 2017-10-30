@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_comment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="comemo.example.yls.qqdemo.ui.CommentActivity">
+    <include layout="@layout/title_bar"></include>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <ListView
+        android:layout_weight="1"
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+    </ListView>
+        <LinearLayout
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/content"
+                android:hint="输入评论"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content" />
+            <Button
+                android:background="@drawable/btn_send_selector"
+                android:layout_centerVertical="true"
+                android:id="@+id/send"
+                android:text="评论"
+                android:enabled="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

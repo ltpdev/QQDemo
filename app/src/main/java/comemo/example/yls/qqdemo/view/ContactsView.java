@@ -12,4 +12,5 @@ public interface ContactsView {
     void delSuccess();
 
     void delFailed();
+
 }

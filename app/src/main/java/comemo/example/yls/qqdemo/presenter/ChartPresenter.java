@@ -17,4 +17,6 @@ public interface ChartPresenter {
     void  sendPictureMessage(String filePath, String name);
 
     void sendVoiceMessage(String filePath, float seconds, String mContact);
+
+    void sendVideoMessage(String s, String videopath, int length, String mContact);
 }

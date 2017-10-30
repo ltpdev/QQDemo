@@ -59,4 +59,13 @@ public class FragmentFactory {
         }
         return mDynamicFragment;
     }
+
+
+    public void destory(){
+        mConversionFragment=null;
+        mContactsFragment=null;
+        mDynamicFragment=null;
+    }
+
+
 }

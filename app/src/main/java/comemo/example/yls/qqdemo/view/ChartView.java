@@ -20,4 +20,8 @@ public interface ChartView {
     void sendVoiceMessageSucucess();
 
     void sendVoiceMessageFailed();
+
+    void sendVideoMessageSucucess();
+
+    void sendVideoMessageFailed();
 }

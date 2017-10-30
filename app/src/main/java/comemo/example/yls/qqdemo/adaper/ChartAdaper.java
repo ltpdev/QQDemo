@@ -15,9 +15,11 @@ import java.util.List;
 
 import comemo.example.yls.qqdemo.widget.RecivedMessageItemView;
 import comemo.example.yls.qqdemo.widget.RecivedPicMessageItemView;
+import comemo.example.yls.qqdemo.widget.RecivedVideoMessageItemView;
 import comemo.example.yls.qqdemo.widget.RecivedVoiceMessageItemView;
 import comemo.example.yls.qqdemo.widget.SendMessageItemView;
 import comemo.example.yls.qqdemo.widget.SendPicMessageItemView;
+import comemo.example.yls.qqdemo.widget.SendVideoMessageItemView;
 import comemo.example.yls.qqdemo.widget.SendVoiceMessageItemView;
 
 /**
@@ -33,6 +35,8 @@ public class ChartAdaper extends RecyclerView.Adapter {
     private int RECIVERDPIC = 5;
     private int SENDVOICE = 6;
     private int RECIVERDVOICE = 7;
+    private int SENDVIDEO = 8;
+    private int RECIVERDVIDEO = 9;
     private Context mContext;
     private List<EMMessage> mEMMessages;
 
@@ -55,6 +59,10 @@ public class ChartAdaper extends RecyclerView.Adapter {
             return new SendVoiceMessageItemViewHolder(new SendVoiceMessageItemView(mContext));
         }else if (viewType == RECIVERDVOICE) {
             return new RecivedVoiceMessageItemViewHolder(new RecivedVoiceMessageItemView(mContext));
+        }else if (viewType == SENDVIDEO) {
+            return new SendVideoMessageItemViewHolder(new SendVideoMessageItemView(mContext));
+        }else if (viewType == RECIVERDVIDEO) {
+            return new RecivedVideoMessageItemViewHolder(new RecivedVideoMessageItemView(mContext));
         }
         return null;
     }
@@ -75,6 +83,10 @@ public class ChartAdaper extends RecyclerView.Adapter {
             ((SendVoiceMessageItemViewHolder) holder).mSendVoiceMessageItemView.bindView(mEMMessages.get(position));
         }else if(holder instanceof RecivedVoiceMessageItemViewHolder){
             ((RecivedVoiceMessageItemViewHolder) holder).mRecivedVoiceMessageItemView.bindView(mEMMessages.get(position));
+        }else if(holder instanceof SendVideoMessageItemViewHolder){
+            ((SendVideoMessageItemViewHolder) holder).mSendVideoMessageItemView.bindView(mEMMessages.get(position));
+        }else if(holder instanceof RecivedVideoMessageItemViewHolder){
+            ((RecivedVideoMessageItemViewHolder) holder).mRecivedVideoMessageItemView.bindView(mEMMessages.get(position));
         }
 
     }
@@ -95,17 +107,22 @@ public class ChartAdaper extends RecyclerView.Adapter {
                 return SENDTXT;
             } else if (body instanceof EMVoiceMessageBody) {
                 return SENDVOICE;
-            } else {
+            } else if (body instanceof EMImageMessageBody) {
                 return SENDPIC;
+            }else {
+                return SENDVIDEO;
             }
+
             //接受界面
         } else {
             if (body instanceof EMTextMessageBody) {
                 return RECIVERDTXT;
             } else if (body instanceof EMVoiceMessageBody) {
                 return RECIVERDVOICE;
-            } else {
+            } else if (body instanceof EMImageMessageBody) {
                 return RECIVERDPIC;
+            }else {
+                return RECIVERDVIDEO;
             }
         }
 
@@ -166,4 +183,27 @@ public class ChartAdaper extends RecyclerView.Adapter {
             this.mRecivedMessageItemView = mRecivedMessageItemView;
         }
     }
+
+
+
+    public class SendVideoMessageItemViewHolder extends RecyclerView.ViewHolder {
+        private SendVideoMessageItemView mSendVideoMessageItemView;
+
+        public SendVideoMessageItemViewHolder(SendVideoMessageItemView mSendVideoMessageItemView) {
+            super(mSendVideoMessageItemView);
+            this.mSendVideoMessageItemView = mSendVideoMessageItemView;
+        }
+    }
+
+    public class RecivedVideoMessageItemViewHolder extends RecyclerView.ViewHolder {
+        private RecivedVideoMessageItemView mRecivedVideoMessageItemView;
+
+        public RecivedVideoMessageItemViewHolder(RecivedVideoMessageItemView mRecivedVideoMessageItemView) {
+            super(mRecivedVideoMessageItemView);
+            this.mRecivedVideoMessageItemView = mRecivedVideoMessageItemView;
+        }
+    }
+
+
+
 }

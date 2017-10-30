@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+   <de.hdodenhof.circleimageview.CircleImageView
+       android:layout_marginLeft="5dp"
+       android:src="@drawable/user"
+       android:id="@+id/cv_user"
+       android:layout_width="60dp"
+       android:layout_height="60dp"
+       />
+    <LinearLayout
+        android:layout_toRightOf="@+id/cv_user"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_marginTop="10dp"
+            android:text="用户名"
+            android:id="@+id/tv_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="5dp"
+            android:text="发表时间"
+            android:id="@+id/tv_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="5dp"
+            android:text="发表内容"
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <comemo.example.yls.qqdemo.widget.CustomGridView
+            android:id="@+id/photoGridView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:clipToPadding="false"
+            android:horizontalSpacing="2dp"
+            android:numColumns="3"
+            android:verticalSpacing="2dp"/>
+        <ImageView
+            android:layout_marginRight="10dp"
+            android:layout_gravity="right"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/message"
+            android:id="@+id/iv_comment"
+            android:layout_width="25dp"
+            android:layout_height="25dp" />
+    </LinearLayout>
+
+
+</RelativeLayout>

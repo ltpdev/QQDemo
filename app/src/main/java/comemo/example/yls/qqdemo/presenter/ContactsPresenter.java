@@ -16,4 +16,6 @@ public interface ContactsPresenter {
     void refresh();
 
     void del(String name);
+
+
 }

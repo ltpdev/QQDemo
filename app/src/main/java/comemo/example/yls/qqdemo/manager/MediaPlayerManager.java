@@ -46,6 +46,7 @@ private static MediaPlayer mMediaPlayer;
             mMediaPlayer.start();
             isPause=false;
         }
+
     }
     public static void release(){
         if (mMediaPlayer!=null){
@@ -53,4 +54,13 @@ private static MediaPlayer mMediaPlayer;
             mMediaPlayer=null;
         }
     }
+
+    public static boolean isPlaying(){
+        if (mMediaPlayer!=null) {
+            return mMediaPlayer.isPlaying();
+        }
+        return false;
+    }
+
+
 }

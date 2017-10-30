@@ -1,30 +1,47 @@
 package comemo.example.yls.qqdemo.ui;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hyphenate.EMContactListener;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMGroup;
+import com.hyphenate.chat.EMGroupManager;
+import com.hyphenate.exceptions.HyphenateException;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import comemo.example.yls.qqdemo.MainActivity;
 import comemo.example.yls.qqdemo.R;
 import comemo.example.yls.qqdemo.adaper.ContactsAdapter;
 import comemo.example.yls.qqdemo.listener.OnLongClickItemListener;
 import comemo.example.yls.qqdemo.presenter.ContactsPresenter;
 import comemo.example.yls.qqdemo.presenter.impl.ContactsPresenterIpml;
+import comemo.example.yls.qqdemo.utils.ThreadUtils;
 import comemo.example.yls.qqdemo.view.ContactsView;
 import comemo.example.yls.qqdemo.widget.SlideBar;
 
@@ -32,16 +49,12 @@ import comemo.example.yls.qqdemo.widget.SlideBar;
  * Created by yls on 2016/12/29.
  */
 
-public class ContactsFragment extends BaseFragment implements ContactsView {
+public class ContactsFragment extends BaseFragment implements ContactsView{
 
     @BindView(R.id.contactsRecyclerView)
     RecyclerView mContactsRecyclerView;
-    @BindView(R.id.title)
-    TextView mTextView;
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout mSwipeRefreshLayout;
-    @BindView(R.id.add)
-    ImageView add;
     @BindView(R.id.SlideBar)
     comemo.example.yls.qqdemo.widget.SlideBar SlideBar;
     @BindView(R.id.tvTxt)
@@ -51,19 +64,17 @@ public class ContactsFragment extends BaseFragment implements ContactsView {
 
     @Override
     public int getLayoutResId() {
-
         return R.layout.fragment_contacts;
     }
 
     @Override
     protected void init() {
         super.init();
+        showLoadingDialog();
         mSwipeRefreshLayout.setColorSchemeResources(R.color.qq_blue, R.color.colorPrimary);
         mContactsPresenter = new ContactsPresenterIpml(this);
         mContactsPresenter.loadContacts();
-        mContactsAdapter = new ContactsAdapter(getContext(), mContactsPresenter.getDataList());
-        mTextView.setText(getString(R.string.contacs));
-        add.setVisibility(View.VISIBLE);
+        mContactsAdapter = new ContactsAdapter(getActivity(), mContactsPresenter.getDataList());
         initRecyclerView();
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -86,6 +97,7 @@ public class ContactsFragment extends BaseFragment implements ContactsView {
     @Override
     public void loadContactsSuccess() {
         Toast.makeText(getContext(), getString(R.string.load_contacts_success), Toast.LENGTH_SHORT).show();
+        dimissDialog();
         mContactsAdapter.notifyDataSetChanged();
         mSwipeRefreshLayout.setRefreshing(false);
     }
@@ -111,6 +123,7 @@ public class ContactsFragment extends BaseFragment implements ContactsView {
 
     @Override
     public void loadContactsFalied() {
+        dimissDialog();
         Toast.makeText(getContext(), getString(R.string.load_contacts_failed), Toast.LENGTH_SHORT).show();
     }
 
@@ -125,11 +138,16 @@ public class ContactsFragment extends BaseFragment implements ContactsView {
     }
 
 
-    @OnClick(R.id.add)
-    public void onClick() {
 
-        goTo(AddFriendActivity.class, false);
+
+    @Override
+    protected void initTitle() {
+        super.initTitle();
+        MainActivity activity= (MainActivity) getActivity();
+        activity.setTitle("联系人");
     }
+
+
 
     private OnLongClickItemListener onLongClickItemListener = new OnLongClickItemListener() {
         @Override
@@ -196,11 +214,8 @@ public class ContactsFragment extends BaseFragment implements ContactsView {
         super.onDestroy();
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-        return rootView;
-    }
+
+
+
+
 }

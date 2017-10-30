@@ -17,10 +17,15 @@ import com.hyphenate.chat.EMMessageBody;
 import com.hyphenate.util.DateUtils;
 
 import java.util.Date;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 import comemo.example.yls.qqdemo.R;
+import comemo.example.yls.qqdemo.model.User;
 import comemo.example.yls.qqdemo.ui.LookPictureActivity;
 
 /**
@@ -34,13 +39,18 @@ public class RecivedPicMessageItemView extends RelativeLayout {
     ImageView imgmessage;
     @BindView(R.id.animl)
     ImageView animl;
+    @BindView(R.id.avatar)
+    ImageView avatar;
+    private Context context;
 
     public RecivedPicMessageItemView(Context context) {
         this(context, null);
+        this.context=context;
     }
 
     public RecivedPicMessageItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context=context;
         init();
     }
 
@@ -52,16 +62,17 @@ public class RecivedPicMessageItemView extends RelativeLayout {
     public void bindView(EMMessage emMessage) {
         long time = emMessage.getMsgTime();
         tvTime.setText(DateUtils.getTimestampString(new Date(time)));
+        //findHeadImg(emMessage.getUserName());
         final EMMessageBody body = emMessage.getBody();
-        if (body instanceof EMImageMessageBody){
+        if (body instanceof EMImageMessageBody) {
             Glide.with(getContext()).load(((EMImageMessageBody) body).getRemoteUrl()).into(imgmessage);
         }
         imgmessage.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent();
+                Intent intent = new Intent();
                 intent.setClass(getContext(), LookPictureActivity.class);
-                intent.putExtra("url",((EMImageMessageBody) body).getRemoteUrl());
+                intent.putExtra("url", ((EMImageMessageBody) body).getRemoteUrl());
                 getContext().startActivity(intent);
             }
         });
@@ -71,8 +82,8 @@ public class RecivedPicMessageItemView extends RelativeLayout {
             tvTxt.setText(R.string.no_txt_message);
 
         }*/
-        AnimationDrawable animationDrawable= (AnimationDrawable) animl.getDrawable();
-        switch (emMessage.status()){
+        AnimationDrawable animationDrawable = (AnimationDrawable) animl.getDrawable();
+        switch (emMessage.status()) {
             case INPROGRESS:
                 animationDrawable.start();
                 break;
@@ -83,7 +94,25 @@ public class RecivedPicMessageItemView extends RelativeLayout {
                 animl.setImageResource(R.mipmap.msg_error);
                 break;
         }
+    }
 
-
+    private void findHeadImg(String name) {
+        BmobQuery<User> query = new BmobQuery<User>();
+        query.addWhereEqualTo("username", name);
+        query.findObjects(new FindListener<User>() {
+            @Override
+            public void done(List<User> list, BmobException e) {
+                if (e == null) {
+                    User user = list.get(0);
+                    if (user.getHead() != null && !user.getHead().equals("")) {
+                        Glide.with(context).load(user.getHead()).into(avatar);
+                    } else {
+                        Glide.with(context).load(R.mipmap.avatar_9).into(avatar);
+                    }
+                } else {
+                    Glide.with(context).load(R.mipmap.avatar_9).into(avatar);
+                }
+            }
+        });
     }
 }

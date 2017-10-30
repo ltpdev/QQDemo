@@ -7,6 +7,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.inputmethod.InputMethodManager;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.util.Util;
+
 import butterknife.ButterKnife;
 
 /**
@@ -49,8 +52,18 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void hideProgressDialog() {
         mProgressDialog.hide();
     }
-public void hideKeyBoard(){
-    InputMethodManager inputMethodManager= (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-    inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
-}
+
+    public void hideKeyBoard() {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        destroy();
+    }
+    protected void destroy() {
+
+    }
 }

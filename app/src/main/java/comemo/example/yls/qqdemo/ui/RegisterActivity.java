@@ -69,14 +69,14 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
 
     @Override
     public void onRegisterSuccessed() {
-        Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
         hideProgressDialog();
+        Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
         goTo(LoginActivity.class);
     }
 
     @Override
     public void onRegisterFailed() {
-
+        hideProgressDialog();
         Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
     }
 

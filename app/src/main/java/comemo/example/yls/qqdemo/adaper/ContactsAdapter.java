@@ -11,6 +11,7 @@ import java.util.List;
 import comemo.example.yls.qqdemo.listener.OnLongClickItemListener;
 import comemo.example.yls.qqdemo.model.ContactListItem;
 import comemo.example.yls.qqdemo.ui.ChartActivity;
+import comemo.example.yls.qqdemo.ui.PersonInfoActivity;
 import comemo.example.yls.qqdemo.widget.ContactsListItemView;
 
 /**
@@ -37,7 +38,10 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.Contac
         holder.mContactsListItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ChartActivity.class);
+                /*Intent intent = new Intent(mContext, ChartActivity.class);
+                intent.putExtra("contact", mContactListItems.get(position).contact);
+                mContext.startActivity(intent);*/
+                Intent intent = new Intent(mContext, PersonInfoActivity.class);
                 intent.putExtra("contact", mContactListItems.get(position).contact);
                 mContext.startActivity(intent);
             }

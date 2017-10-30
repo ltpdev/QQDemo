@@ -6,6 +6,7 @@ import com.hyphenate.exceptions.HyphenateException;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
+import comemo.example.yls.qqdemo.model.User;
 import comemo.example.yls.qqdemo.presenter.RegisterPresenter;
 import comemo.example.yls.qqdemo.utils.StringUtils;
 import comemo.example.yls.qqdemo.utils.ThreadUtils;
@@ -20,7 +21,6 @@ public class RegisterPresenterImpl implements RegisterPresenter {
 
     public RegisterPresenterImpl(RegisterView mRegisterView) {
         this.mRegisterView = mRegisterView;
-
     }
 
     @Override
@@ -44,13 +44,13 @@ public class RegisterPresenterImpl implements RegisterPresenter {
     }
 
     public void registerToBmob(final String name, final String password) {
-        BmobUser bmobUser = new BmobUser();
-        bmobUser.setUsername(name);
-        bmobUser.setPassword(password);
-        bmobUser.signUp(new SaveListener<BmobUser>() {
+        User user = new User();
+        user.setUsername(name);
+        user.setPassword(password);
+        user.signUp(new SaveListener<User>() {
 
             @Override
-            public void done(BmobUser bmobUser, BmobException e) {
+            public void done(User bmobUser, BmobException e) {
                 if (e == null) {
                     registerToEaseMob(name, password);
                 } else {

@@ -1,6 +1,7 @@
 package comemo.example.yls.qqdemo.presenter.impl;
 
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMGroupManager;
 import com.hyphenate.exceptions.HyphenateException;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import comemo.example.yls.qqdemo.view.ContactsView;
  * Created by yls on 2016/12/30.
  */
 
-public class ContactsPresenterIpml implements ContactsPresenter {
+public class ContactsPresenterIpml implements ContactsPresenter{
     private ContactsView mContactsView;
     private List<ContactListItem> mContactListItems;
 
@@ -117,4 +118,5 @@ public class ContactsPresenterIpml implements ContactsPresenter {
             }
         });
     }
+
 }

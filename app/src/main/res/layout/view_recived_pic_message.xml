@@ -20,12 +20,12 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_margin="10dp"
-            android:src="@mipmap/avatar_9"/>
+            android:src="@mipmap/avatar1"/>
 
         <ImageView
             android:id="@id/img_message"
-            android:layout_width="70dp"
-            android:layout_height="60dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_toRightOf="@id/avatar"
             android:gravity="center"
              android:src="@mipmap/ic_launcher"

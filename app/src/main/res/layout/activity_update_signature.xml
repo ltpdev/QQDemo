@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_update_signature"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="comemo.example.yls.qqdemo.ui.UpdateSignatureActivity">
+    <include layout="@layout/title_bar"></include>
+        <EditText
+            android:hint="输入新的个性签名"
+            android:id="@+id/edt_signature"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+</LinearLayout>

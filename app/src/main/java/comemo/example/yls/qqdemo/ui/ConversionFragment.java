@@ -15,6 +15,10 @@ import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +28,8 @@ import butterknife.ButterKnife;
 import comemo.example.yls.qqdemo.MainActivity;
 import comemo.example.yls.qqdemo.R;
 import comemo.example.yls.qqdemo.adaper.ConverSationAdapter;
+import comemo.example.yls.qqdemo.event.DynamicDanEvent;
+import comemo.example.yls.qqdemo.event.SendMessageEvent;
 import comemo.example.yls.qqdemo.presenter.ConversationPresenter;
 import comemo.example.yls.qqdemo.presenter.impl.ConversationPresenterImpl;
 import comemo.example.yls.qqdemo.utils.ThreadUtils;
@@ -34,8 +40,6 @@ import comemo.example.yls.qqdemo.view.ConversationView;
  */
 
 public class ConversionFragment extends BaseFragment implements ConversationView {
-    @BindView(R.id.title)
-    TextView title;
     @BindView(R.id.converSationRecyclerView)
     RecyclerView converSationRecyclerView;
     private ConverSationAdapter mconverSationAdapter;
@@ -82,18 +86,26 @@ public class ConversionFragment extends BaseFragment implements ConversationView
 
     }
 
+
+    @Override
+    protected void initTitle() {
+        super.initTitle();
+        MainActivity activity= (MainActivity) getActivity();
+        activity.setTitle("消息");
+    }
+
     @Override
     protected void init() {
         super.init();
+        showLoadingDialog();
         conversationPresenter=new ConversationPresenterImpl(this);
-        title.setText(getString(R.string.conversation));
         initRecyclerView();
         EMClient.getInstance().chatManager().addMessageListener(emMessageListener);
-
+        conversationPresenter.loadConversation();
     }
 
     private void initRecyclerView() {
-        mconverSationAdapter=new ConverSationAdapter(getContext(),conversationPresenter.getDataList());
+        mconverSationAdapter=new ConverSationAdapter(getActivity(),conversationPresenter.getDataList());
         converSationRecyclerView.setHasFixedSize(true);
         converSationRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         converSationRecyclerView.setAdapter(mconverSationAdapter);
@@ -101,19 +113,36 @@ public class ConversionFragment extends BaseFragment implements ConversationView
 
     @Override
     public void onResume() {
-        conversationPresenter.loadConversation();
         super.onResume();
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        if(!EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().register(this);
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onUpdate(SendMessageEvent event) {
+        if (event.isUpdate()) {
+            conversationPresenter.loadConversation();
+        }
+    }
+
+
+    @Override
     public void onAllConversationsLoaded() {
-        Toast.makeText(getContext(), getString(R.string.onAllConversationsLoaded), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), getString(R.string.onAllConversationsLoaded), Toast.LENGTH_SHORT).show();
+        dimissDialog();
         mconverSationAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onDestroy() {
         EMClient.getInstance().chatManager().removeMessageListener(emMessageListener);
+        EventBus.getDefault().unregister(this);
         super.onDestroy();
     }
 }

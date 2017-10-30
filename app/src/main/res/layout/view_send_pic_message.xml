@@ -25,8 +25,8 @@
 
         <ImageView
             android:id="@id/img_message"
-            android:layout_width="70dp"
-            android:layout_height="60dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_toLeftOf="@id/avatar"
             android:gravity="center"
              android:src="@mipmap/ic_launcher"

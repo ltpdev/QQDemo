@@ -22,7 +22,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 允许读取手机状态 用于创建BmobInstallation -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO"></uses-permission>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:name=".app.QQApplication"
@@ -31,7 +31,7 @@
         android:label="酷聊"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".ui.SplashActivity"
             android:theme="@style/FullScreenTheme">
@@ -43,14 +43,19 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.confirmationActivity" />
-        <activity android:name=".ui.ChartActivity" />
-        <activity android:name=".ui.LoginActivity" />
+        <activity
+            android:name=".ui.ChartActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.LoginActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".ui.RegisterActivity" />
         <activity android:name=".ui.AddFriendActivity" />
 
         <meta-data
             android:name="EASEMOB_APPKEY"
-            android:value="1150161228115620#test01" />
+            android:value="1178170316115222#qqdemo" />
         <!-- 声明SDK所需的service SDK核心功能 -->
         <service
             android:name="com.hyphenate.chat.EMChatService"
@@ -73,7 +78,28 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".ui.LookPictureActivity"></activity>
+        <activity
+            android:name="me.iwf.photopicker.PhotoPickerActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name="me.iwf.photopicker.PhotoPagerActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".ui.LookPictureActivity" />
+        <activity android:name=".ui.GroupListActivity" />
+        <activity android:name=".ui.GroupDetailActivity" />
+        <activity android:name=".ui.UpdateInfoActivity" />
+        <activity android:name=".ui.WriteDynamicActivity" />
+        <!--
+ ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity android:name=".ui.CommentActivity" />
+        <activity android:name=".ui.PersonInfoActivity" />
+        <activity android:name=".ui.UpdateSignatureActivity"></activity>
     </application>
 
 </manifest>

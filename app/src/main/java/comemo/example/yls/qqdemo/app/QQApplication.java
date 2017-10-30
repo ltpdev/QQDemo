@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.RemoteViews;
 
 import com.hyphenate.EMContactListener;
+
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;

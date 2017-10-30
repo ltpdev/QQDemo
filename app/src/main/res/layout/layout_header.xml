@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/colorPrimary"
+    android:layout_height="180dp">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/icon_user"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/user"
+        android:layout_width="80dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="80dp" />
+    <TextView
+        android:gravity="center"
+        android:id="@+id/name_user"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="#fff"
+        android:singleLine="true"
+        android:text="never try,never konw!"/>
+    <TextView
+        android:layout_marginTop="5dp"
+        android:id="@+id/signature"
+        android:gravity="center"
+        android:singleLine="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="#fff"
+        android:text="暂无个性签名"/>
+</LinearLayout>

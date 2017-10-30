@@ -36,6 +36,7 @@ public class AudioRecorderButton extends Button implements AudioManager.AudioPre
         super(context, null);
     }
 
+    private Thread thread;
     private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -43,7 +44,7 @@ public class AudioRecorderButton extends Button implements AudioManager.AudioPre
                 case MSG_AUDIO_PREPARED:
                     dialogManager.showRecordingDialog();
                     isRecordering=true;
-                    new Thread(new Runnable() {
+                     thread=new Thread(new Runnable() {
                         @Override
                         public void run() {
                             while (isRecordering){
@@ -57,7 +58,8 @@ public class AudioRecorderButton extends Button implements AudioManager.AudioPre
                                 }
                             }
                         }
-                    }).start();
+                    });
+                    thread.start();
                 break;
                 case MSG_VOICE_CHANGE:
                     dialogManager.updateVoiceLevel(audioManager.getVoiceLevel(7));
@@ -107,8 +109,16 @@ public interface AudioFinshRecorderListener{
             case MotionEvent.ACTION_MOVE:
                 if (isRecordering) {
                     if (wantToCancel(x, y)) {
+                        //停止线程eee
+                        if (!thread.isInterrupted()){
+                            thread.interrupt();
+                        }
                         changeState(STATE_WANT_TO_CANCEL);
                     } else {
+                        if (thread.isInterrupted()){
+                            //开始启动线程
+                            thread.start();
+                        }
                         changeState(STATE_RECORDERING);
                     }
                 }
@@ -121,9 +131,11 @@ public interface AudioFinshRecorderListener{
                 if (!isRecordering||mTime<0.6f){
                     dialogManager.tooShort();
                     audioManager.cancel();
+                    reset();
                     handler.sendEmptyMessageDelayed(MSG_DIALOG_DIMISS,1300);
                     return super.onTouchEvent(event);
                 }
+
 
                 if (mCurState == STATE_RECORDERING) {
                     //release
@@ -149,7 +161,6 @@ public interface AudioFinshRecorderListener{
         isReady=false;
         changeState(STATE_NORMAL);
         mTime=0;
-
     }
 
     private boolean wantToCancel(int x, int y) {

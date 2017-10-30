@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-   <include layout="@layout/title_bar"></include>
-   <ImageView
-       android:layout_marginTop="30dp"
-       android:layout_marginBottom="20dp"
-       android:layout_gravity="center_horizontal"
-       android:layout_width="60dp"
-       android:layout_height="60dp"
-       android:src="@mipmap/avatar_10"/>
-   <Button
-       android:textAllCaps="false"
-       android:id="@id/logout"
-       android:background="@drawable/btn_logout_selector"
-       android:text="@string/logout"
-       android:textSize="22sp"
-       android:textColor="@android:color/white"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"/>
-</LinearLayout>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ListView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatbutton"
+        app:fabSize="normal"
+        app:elevation="8dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="5dp"
+        app:backgroundTint="@color/qq_blue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        app:layout_behavior="@string/behavior_my_fab_scale"
+        android:src="@drawable/addw" />
+
+
+</android.support.design.widget.CoordinatorLayout>

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import comemo.example.yls.qqdemo.presenter.ChartPresenter;
-import comemo.example.yls.qqdemo.ui.ChartActivity;
 import comemo.example.yls.qqdemo.utils.ThreadUtils;
 import comemo.example.yls.qqdemo.view.ChartView;
 
@@ -17,7 +16,7 @@ import comemo.example.yls.qqdemo.view.ChartView;
  * Created by yls on 2016/12/30.
  */
 
-public class ChartPresenterImpl implements ChartPresenter {
+public class ChartPresenterImpl implements ChartPresenter{
     private ChartView mChartView;
     private List<EMMessage> mEMMessages;
 
@@ -168,7 +167,6 @@ public class ChartPresenterImpl implements ChartPresenter {
                             @Override
                             public void run() {
                                 mChartView.sendVoiceMessageSucucess();
-
                             }
                         });
                     }
@@ -194,6 +192,46 @@ public class ChartPresenterImpl implements ChartPresenter {
             }
         });
 
+    }
 
+    @Override
+    public void sendVideoMessage(final String videopath,final String thumpath, final int length, final String mContact) {
+        ThreadUtils.runOnBackgroundThread(new Runnable() {
+            @Override
+            public void run() {
+                //bhuhhu
+                EMMessage message = EMMessage.createVideoSendMessage(videopath,thumpath,length, mContact);
+                mEMMessages.add(message);
+                message.setMessageStatusCallback(new EMCallBack() {
+                    @Override
+                    public void onSuccess() {
+                        ThreadUtils.rinOnMainThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mChartView.sendVideoMessageSucucess();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onError(int i, String s) {
+                        ThreadUtils.rinOnMainThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mChartView.sendVideoMessageFailed();
+
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onProgress(int i, String s) {
+
+                    }
+                });
+
+                EMClient.getInstance().chatManager().sendMessage(message);
+            }
+        });
     }
 }
